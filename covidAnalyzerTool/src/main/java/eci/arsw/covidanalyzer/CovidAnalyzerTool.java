@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,17 +17,25 @@ import java.util.stream.Stream;
 /**
  * A Camel Application
  */
-public class CovidAnalyzerTool {
+public class CovidAnalyzerTool implements Runnable {
 
     private ResultAnalyzer resultAnalyzer;
     private TestReader testReader;
     private int amountOfFilesTotal;
     private AtomicInteger amountOfFilesProcessed;
 
+    public static final int NUMBER_THREADS = 5;
+    private ConcurrentLinkedDeque<CovidThread> covidAnalyzerThreads;
+    private boolean pause;
+
     public CovidAnalyzerTool() {
         resultAnalyzer = new ResultAnalyzer();
         testReader = new TestReader();
         amountOfFilesProcessed = new AtomicInteger();
+
+        amountOfFilesTotal = -1;
+        covidAnalyzerThreads = new ConcurrentLinkedDeque<>();
+        pause = false;
     }
 
     public void processResultData() {
@@ -77,5 +86,9 @@ public class CovidAnalyzerTool {
         }
     }
 
+    @Override
+    public void run() {
+
+    }
 }
 
