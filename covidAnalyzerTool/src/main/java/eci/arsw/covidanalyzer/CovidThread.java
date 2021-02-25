@@ -12,6 +12,13 @@ public class CovidThread extends Thread{
 
     private boolean bandera;
 
+    public CovidThread(ResultAnalyzer result, TestReader test, AtomicInteger atomic, List<File> resultList){
+        this.result = result;
+        this.atomic= atomic;
+        this.test = test;
+        this.resultList = resultList;
+    }
+
     public void continueThread(){
         bandera = false;
         synchronized (this){
@@ -28,8 +35,10 @@ public class CovidThread extends Thread{
         int longi = resultList.size();
 
         for(File transactionFile : resultList) {
+
             List<Result> resultados = test.readResultsFromFile(transactionFile);
-            for(Result res : resultados) {
+            for(Result res : resultados)
+            {
                 result.addResult(res);
             }
             atomic.incrementAndGet();

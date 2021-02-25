@@ -85,10 +85,48 @@ public class CovidAnalyzerTool implements Runnable {
             System.out.println(message);
         }
     }
+    public void continueThread() {
+        pause= false;
+        for (CovidThread thread:covidAnalyzerThreads) {
+            thread.continueThread();
+        }
+    }
 
     @Override
     public void run() {
+        Thread thread = new Thread(this::processResultData);
+        thread.start();
 
+        while (amountOfFilesTotal==-1 || amountOfFilesProcessed.get()<amountOfFilesTotal) {
+            Scanner scanner = new Scanner(System.in);
+            String line = scanner.nextLine();
+
+            if (line.contains("exit")) {
+                break;
+            } else if (line.isEmpty()) {
+                if (pause) {
+                    ();
+                } else {
+                    espere();
+                    mostrarMensaje();
+                }
+            } else if (!pause && !line.isEmpty()) {
+                mostrarMensaje();
+            }
+        }
+    }
+
+
+    private void espere() {
+        pause=true;
+        for (CovidThread thread :covidAnalyzerThreads) {
+            thread.espera();
+        }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
     }
 }
 
