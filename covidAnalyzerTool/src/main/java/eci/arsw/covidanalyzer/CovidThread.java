@@ -35,6 +35,13 @@ public class CovidThread extends Thread{
         int longi = resultList.size();
 
         for(File transactionFile : resultList) {
+            while (bandera) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
             List<Result> resultados = test.readResultsFromFile(transactionFile);
             for(Result res : resultados)

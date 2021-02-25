@@ -38,6 +38,7 @@ public class TestReporter {
                 complement += "false-negative";
                 break;
         }
+        /**
 
         try {
             String jsonString = mapper.writeValueAsString(result);
@@ -47,6 +48,8 @@ public class TestReporter {
         } catch (JsonProcessingException | UnirestException e) {
             Logger.getLogger(TestReporter.class.getName()).log(Level.SEVERE, "Unable to report covid test result", e);
         }
+         *
+         */
     }
 
 }
