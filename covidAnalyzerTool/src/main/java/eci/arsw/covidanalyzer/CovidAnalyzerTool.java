@@ -105,13 +105,13 @@ public class CovidAnalyzerTool implements Runnable {
                 break;
             } else if (line.isEmpty()) {
                 if (pause) {
-                    ();
+                    continueThread();
                 } else {
                     espere();
-                    mostrarMensaje();
+
                 }
             } else if (!pause && !line.isEmpty()) {
-                mostrarMensaje();
+
             }
         }
     }
