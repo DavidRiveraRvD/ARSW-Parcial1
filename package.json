@@ -21,7 +21,7 @@
     "access": "restricted"
   },
   "devDependencies": {
-    "semantic-release": "17.3.9"
+    "semantic-release": "19.0.3"
   },
   "release": {
     "branches": [
